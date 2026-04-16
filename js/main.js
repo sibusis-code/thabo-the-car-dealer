@@ -54,6 +54,20 @@
     });
   }
 
+  // ─── STICKY HEADER SCROLL STATE ───
+  if (headerEl) {
+    function updateHeaderState() {
+      if (window.scrollY > 14) {
+        headerEl.classList.add('scrolled');
+      } else {
+        headerEl.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', updateHeaderState, { passive: true });
+    updateHeaderState();
+  }
+
   // ─── IMAGE GALLERY (detail page) ───
   const galleryMain   = document.getElementById('galleryMain');
   const galleryThumbs = document.getElementById('galleryThumbs');

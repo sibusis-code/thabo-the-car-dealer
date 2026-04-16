@@ -29,6 +29,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-top: 72px;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -37,11 +38,20 @@ ul { list-style: none; }
 
 /* ─── HEADER / NAV ─── */
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
   background: var(--navy);
   box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+header.scrolled {
+  background: rgba(27, 31, 59, 0.94);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
 }
 
 .nav-inner {
@@ -52,12 +62,35 @@ header {
   align-items: center;
   justify-content: space-between;
   height: 72px;
+  transition: height 0.25s ease;
+}
+
+header.scrolled .nav-inner { height: 64px; }
+
+.nav-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid rgba(201, 152, 42, 0.9);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: width 0.25s ease, height 0.25s ease, box-shadow 0.25s ease;
 }
 
 .nav-logo img {
-  height: 56px;
-  width: auto;
+  width: 88%;
+  height: 88%;
   object-fit: contain;
+}
+
+header.scrolled .nav-logo {
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
 }
 
 .nav-links {
@@ -123,7 +156,9 @@ header {
 
 /* ─── HERO ─── */
 .hero {
-  background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 60%, #2A2F5B 100%);
+  background:
+    linear-gradient(115deg, rgba(13, 17, 23, 0.84) 0%, rgba(27, 31, 59, 0.84) 56%, rgba(42, 47, 91, 0.72) 100%),
+    url("../images/2020 volkswagen golf 7 vii gti 2.0 tsi dsg/WhatsApp Image 2026-04-16 at 8.22.28 PM.jpeg") center/cover no-repeat;
   color: var(--white);
   padding: 100px 24px 80px;
   text-align: center;
@@ -135,7 +170,7 @@ header {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9982A' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.42));
 }
 
 .hero-content { position: relative; z-index: 1; max-width: 750px; margin: 0 auto; }
@@ -522,16 +557,38 @@ section { padding: 72px 24px; }
 }
 
 .why-icon {
-  font-size: 2.5rem;
-  margin-bottom: 14px;
-  display: block;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(201, 152, 42, 0.12);
+  color: var(--gold-dark);
+}
+
+.why-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke-width: 2.1;
+}
+
+.why-item:hover .why-icon {
+  background: rgba(201, 152, 42, 0.2);
+  color: var(--navy);
+}
+
+.why-item:hover .why-icon svg {
+  transform: scale(1.06);
+  transition: transform 0.2s ease;
 }
 
 .why-item h3 {
   font-size: 1rem;
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .why-item p { font-size: 0.88rem; color: var(--text-muted); }
@@ -1036,6 +1093,7 @@ footer span { color: var(--gold); }
 /* ── Mobile (≤ 480px) ── */
 @media (max-width: 480px) {
   /* ─ Nav ─ */
+  body { padding-top: 64px; }
   .nav-inner { padding: 0 16px; height: 64px; }
   .nav-logo img { height: 46px; }
   .nav-links { top: 64px; }
@@ -1074,7 +1132,8 @@ footer span { color: var(--gold); }
   /* ─ Why us ─ */
   .why-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .why-item { padding: 20px 12px; }
-  .why-icon { font-size: 2rem; margin-bottom: 10px; }
+  .why-icon { width: 48px; height: 48px; margin-bottom: 10px; }
+  .why-icon svg { width: 24px; height: 24px; }
   .why-item h3 { font-size: 0.9rem; }
   .why-item p { font-size: 0.8rem; }
 
