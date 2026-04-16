@@ -4,32 +4,53 @@
   'use strict';
 
   // ─── MOBILE MENU ───
-  const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('navLinks');
+  const hamburger  = document.getElementById('hamburger');
+  const navLinks   = document.getElementById('navLinks');
+  const headerEl   = document.querySelector('header');
+
+  function closeMenu() {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function openMenu() {
+    // Sync panel top to actual header height (handles resize / different screens)
+    if (headerEl) navLinks.style.top = headerEl.offsetHeight + 'px';
+    navLinks.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden'; // prevent background scroll
+  }
 
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', function () {
-      const isOpen = navLinks.classList.toggle('open');
-      hamburger.classList.toggle('open', isOpen);
-      hamburger.setAttribute('aria-expanded', isOpen);
+      navLinks.classList.contains('open') ? closeMenu() : openMenu();
     });
 
-    // Close menu when a nav link is clicked
+    // Close on any nav link click
     navLinks.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        navLinks.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', closeMenu);
     });
 
-    // Close menu on outside click
+    // Close on outside click
     document.addEventListener('click', function (e) {
-      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-        navLinks.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
+      if (navLinks.classList.contains('open') &&
+          !hamburger.contains(e.target) &&
+          !navLinks.contains(e.target)) {
+        closeMenu();
       }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) closeMenu();
+    });
+
+    // Re-sync on resize (e.g. orientation change)
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) closeMenu();
     });
   }
 

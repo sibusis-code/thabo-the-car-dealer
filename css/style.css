@@ -178,6 +178,7 @@ header {
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 14px 30px;
   border-radius: 8px;
@@ -186,7 +187,9 @@ header {
   cursor: pointer;
   border: 2px solid transparent;
   transition: var(--transition);
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.3;
+  text-align: center;
 }
 
 .btn-primary {
@@ -306,7 +309,7 @@ section { padding: 72px 24px; }
 
 .car-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 28px;
 }
 
@@ -873,21 +876,178 @@ footer span { color: var(--gold); }
 .credit-badge .score { font-size: 2.4rem; font-weight: 900; display: block; line-height: 1; }
 .credit-badge p { font-size: 0.82rem; font-weight: 600; margin-top: 4px; }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .detail-inner { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   Breakpoints: 1024 | 768 | 480 | 360
+   ═══════════════════════════════════════════ */
+
+/* ── Large tablet / small desktop (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .nav-links { gap: 20px; }
+  .nav-links a { font-size: 0.88rem; }
+
+  .car-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .finance-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .detail-inner { grid-template-columns: 1fr 320px; gap: 24px; }
+
+  section { padding: 60px 20px; }
 }
 
-@media (max-width: 640px) {
-  .nav-links { display: none; position: fixed; inset: 72px 0 0 0; background: var(--navy); flex-direction: column; align-items: center; justify-content: flex-start; gap: 0; padding-top: 24px; overflow-y: auto; }
-  .nav-links.open { display: flex; }
-  .nav-links a { padding: 16px 24px; width: 100%; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
-  .nav-cta { border-radius: 0 !important; }
+/* ── Tablet portrait (≤ 768px) ── */
+@media (max-width: 768px) {
+  /* ─ Nav ─ */
   .hamburger { display: flex; }
-  section { padding: 52px 20px; }
-  .hero { padding: 72px 20px 60px; }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--navy);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 16px 0 40px;
+    overflow-y: auto;
+    z-index: 999;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block;
+    padding: 16px 28px;
+    font-size: 1rem;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    border-left: none !important;
+  }
+  .nav-cta {
+    margin: 16px 20px 0 !important;
+    border-radius: 8px !important;
+    text-align: center !important;
+    border-bottom: none !important;
+  }
+
+  /* ─ Sections ─ */
+  section { padding: 52px 16px; }
+  .section-header { margin-bottom: 36px; }
+
+  /* ─ Hero ─ */
+  .hero { padding: 80px 16px 56px; }
+  .hero p { font-size: 1rem; }
   .hero-actions { flex-direction: column; align-items: center; }
-  .stats-inner { gap: 24px; }
-  .stat-item .stat-num { font-size: 1.4rem; }
+  .hero-actions .btn { width: 100%; max-width: 320px; }
+
+  /* ─ Stats ─ */
+  .stats-bar { padding: 20px 16px; }
+  .stats-inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .stat-item { padding: 8px 4px; }
+
+  /* ─ Car grid ─ */
+  .car-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+
+  /* ─ Finance cards ─ */
+  .finance-grid { grid-template-columns: 1fr; gap: 16px; }
+
+  /* ─ Why us ─ */
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* ─ Contact ─ */
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  /* ─ Detail page ─ */
+  .detail-inner { grid-template-columns: 1fr; gap: 24px; }
+  .detail-page { padding: 28px 16px; }
+
+  /* ─ Gallery ─ */
+  .gallery-thumb { width: 76px; height: 52px; }
+}
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  /* ─ Nav ─ */
+  .nav-inner { padding: 0 16px; height: 64px; }
+  .nav-logo img { height: 46px; }
+  .nav-links { top: 64px; }
+
+  /* ─ Sections ─ */
+  section { padding: 44px 14px; }
+  .section-header { margin-bottom: 24px; }
+  .section-header p { font-size: 0.9rem; }
+
+  /* ─ Hero ─ */
+  .hero { padding: 60px 14px 44px; }
+  .hero-badge { font-size: 0.7rem; letter-spacing: 1.5px; padding: 5px 14px; margin-bottom: 18px; }
+  .hero p { font-size: 0.92rem; margin-bottom: 28px; }
+
+  /* ─ Stats ─ */
+  .stat-item .stat-num { font-size: 1.5rem; }
+  .stat-item .stat-label { font-size: 0.7rem; }
+
+  /* ─ Car grid — single column ─ */
+  .car-grid { grid-template-columns: 1fr; gap: 16px; }
+  .car-card-body { padding: 16px; }
+  .car-price { font-size: 1.3rem; }
+  .car-card-footer { gap: 8px; }
+
+  /* ─ Finance ─ */
+  .finance-card { padding: 20px 16px; }
+  .credit-highlight { padding: 24px 16px; }
+  .credit-highlight .credit-score { font-size: 3rem; }
+
+  /* ─ Why us ─ */
+  .why-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .why-item { padding: 20px 12px; }
+  .why-icon { font-size: 2rem; margin-bottom: 10px; }
+  .why-item h3 { font-size: 0.9rem; }
+  .why-item p { font-size: 0.8rem; }
+
+  /* ─ Contact ─ */
+  .contact-item-text strong { font-size: 0.88rem; word-break: break-word; }
+  .contact-cta p { font-size: 0.9rem; }
+
+  /* ─ Detail page ─ */
+  .detail-page { padding: 20px 14px; }
+  .info-card { padding: 18px 16px; }
+  .info-card .car-title { font-size: 1.15rem; }
+  .info-card .car-price-large { font-size: 1.6rem; margin-bottom: 14px; }
+  .info-specs-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .info-spec { padding: 10px 8px; }
+  .info-spec .spec-value { font-size: 0.88rem; }
+  .finance-requirements { padding: 18px 16px; }
+
+  /* ─ Gallery ─ */
+  .gallery-btn { width: 38px; height: 38px; }
+  .gallery-thumb { width: 64px; height: 44px; }
+  .gallery-thumbs { padding: 8px; gap: 6px; }
+
+  /* ─ Credit badge ─ */
+  .credit-badge .score { font-size: 2rem; }
+  .credit-badge p { font-size: 0.78rem; }
+
+  /* ─ Buttons ─ */
+  .btn { padding: 13px 18px; font-size: 0.88rem; }
+}
+
+/* ── Small mobile (≤ 360px) ── */
+@media (max-width: 360px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .info-specs-grid { grid-template-columns: 1fr 1fr; }
+  .car-specs { gap: 8px; }
+  .car-spec { font-size: 0.76rem; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .section-header h2 { font-size: 1.35rem; }
+  .hero { padding: 52px 14px 40px; }
+  .detail-breadcrumb { font-size: 0.78rem; }
+  .gallery-thumb { width: 56px; height: 38px; }
 }
