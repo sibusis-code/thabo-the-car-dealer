@@ -610,14 +610,15 @@
         </div>
 
         <div class="contact-cta">
-          <h3>Send Us a Message</h3>
-          <p>Fill in the form and we will email you back with finance and vehicle options.</p>
+          <h3>Detailed Vehicle Request Form</h3>
+          <p>Use this form to request cars not currently in stock and complete a full finance lead pre-check.</p>
 
           <form class="contact-form" action="https://formsubmit.co/info@thabothecardealr.co.za" method="POST">
-            <input type="hidden" name="_subject" value="New enquiry from Thabo The Car Dealer website">
+            <input type="hidden" name="_subject" value="Detailed vehicle sourcing and finance lead">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
 
+            <p class="form-section-title">Client Details</p>
             <div class="form-grid">
               <div class="form-group">
                 <label for="contact-name">Full Name</label>
@@ -627,21 +628,179 @@
                 <label for="contact-phone">Phone Number</label>
                 <input id="contact-phone" name="Phone Number" type="tel" value="0682515329" required>
               </div>
+              <div class="form-group">
+                <label for="contact-email">Email Address</label>
+                <input id="contact-email" name="Email" type="email" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-city">City / Province</label>
+                <input id="contact-city" name="Location" type="text" placeholder="e.g. Johannesburg, Gauteng" required>
+              </div>
+            </div>
+
+            <p class="form-section-title">Vehicle Request (Even If Not In Stock)</p>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="contact-make">Preferred Make</label>
+                <input id="contact-make" name="Preferred Make" type="text" placeholder="e.g. Toyota" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-model">Preferred Model / Variant</label>
+                <input id="contact-model" name="Preferred Model" type="text" placeholder="e.g. Hilux 2.8 GD-6" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-year-from">Year Range From</label>
+                <input id="contact-year-from" name="Year From" type="number" min="2000" max="2030" placeholder="e.g. 2021">
+              </div>
+              <div class="form-group">
+                <label for="contact-year-to">Year Range To</label>
+                <input id="contact-year-to" name="Year To" type="number" min="2000" max="2030" placeholder="e.g. 2024">
+              </div>
+              <div class="form-group">
+                <label for="contact-body-type">Body Type</label>
+                <select id="contact-body-type" name="Body Type" required>
+                  <option value="">Select body type</option>
+                  <option value="Hatchback">Hatchback</option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Bakkie">Bakkie</option>
+                  <option value="MPV">MPV</option>
+                  <option value="Any">Any</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-transmission">Transmission</label>
+                <select id="contact-transmission" name="Transmission" required>
+                  <option value="">Select transmission</option>
+                  <option value="Automatic">Automatic</option>
+                  <option value="Manual">Manual</option>
+                  <option value="Any">Any</option>
+                </select>
+              </div>
+            </div>
+
+            <p class="form-section-title">Budget & Finance Lead Details</p>
+            <div class="form-group">
+              <label for="contact-budget">Budget Range</label>
+              <select id="contact-budget" name="Budget Range" required>
+                <option value="">Select budget range</option>
+                <option value="Below R150,000">Below R150,000</option>
+                <option value="R150,000 - R250,000">R150,000 - R250,000</option>
+                <option value="R250,000 - R350,000">R250,000 - R350,000</option>
+                <option value="R350,000 - R500,000">R350,000 - R500,000</option>
+                <option value="R500,000+">R500,000+</option>
+              </select>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="contact-deposit">Estimated Deposit (R)</label>
+                <input id="contact-deposit" name="Deposit Amount" type="number" min="0" placeholder="e.g. 50000">
+              </div>
+              <div class="form-group">
+                <label for="contact-installment">Target Monthly Installment (R)</label>
+                <input id="contact-installment" name="Target Monthly Installment" type="number" min="0" placeholder="e.g. 6500">
+              </div>
+              <div class="form-group">
+                <label for="contact-income">Gross Monthly Income (R)</label>
+                <input id="contact-income" name="Gross Monthly Income" type="number" min="0" placeholder="e.g. 28000" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-employment">Employment Type</label>
+                <select id="contact-employment" name="Employment Type" required>
+                  <option value="">Select employment type</option>
+                  <option value="Permanent">Permanent</option>
+                  <option value="Contract">Contract</option>
+                  <option value="Self-employed">Self-employed</option>
+                  <option value="Business owner">Business owner</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="contact-credit">Estimated Credit Score</label>
+                <select id="contact-credit" name="Estimated Credit Score" required>
+                  <option value="">Select range</option>
+                  <option value="Below 600">Below 600</option>
+                  <option value="600 - 649">600 - 649</option>
+                  <option value="650 - 699">650 - 699</option>
+                  <option value="700+">700+</option>
+                  <option value="Not sure">Not sure</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-blacklisted">Blacklisted Status</label>
+                <select id="contact-blacklisted" name="Blacklisted" required>
+                  <option value="">Select</option>
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-debt-review">Under Debt Review</label>
+                <select id="contact-debt-review" name="Under Debt Review" required>
+                  <option value="">Select</option>
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-docs">Documents Ready (ID, licence, payslips, bank statements)</label>
+                <select id="contact-docs" name="Documents Ready" required>
+                  <option value="">Select</option>
+                  <option value="Yes">Yes</option>
+                  <option value="Partially">Partially</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+            </div>
+
+            <p class="form-section-title">Deal Preferences</p>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="contact-tradein">Trade-in Available?</label>
+                <select id="contact-tradein" name="Trade-in" required>
+                  <option value="">Select</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-tradein-details">Trade-in Details</label>
+                <input id="contact-tradein-details" name="Trade-in Details" type="text" placeholder="e.g. 2016 Polo 1.2TSI 145,000km">
+              </div>
+              <div class="form-group">
+                <label for="contact-buy-time">When Do You Want To Buy?</label>
+                <select id="contact-buy-time" name="Purchase Timeline" required>
+                  <option value="">Select timeline</option>
+                  <option value="Immediately">Immediately</option>
+                  <option value="Within 30 days">Within 30 days</option>
+                  <option value="1-3 months">1-3 months</option>
+                  <option value="Just comparing for now">Just comparing for now</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-contact-method">Preferred Contact Method</label>
+                <select id="contact-contact-method" name="Preferred Contact Method" required>
+                  <option value="">Select contact method</option>
+                  <option value="Phone call">Phone call</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="Email">Email</option>
+                </select>
+              </div>
             </div>
 
             <div class="form-group">
-              <label for="contact-email">Email Address</label>
-              <input id="contact-email" name="Email" type="email" required>
+              <label for="contact-message">Extra Notes</label>
+              <textarea id="contact-message" name="Message" rows="4" placeholder="Tell us anything else that helps us source your car faster (color, features, mileage limit, etc)."></textarea>
             </div>
 
-            <div class="form-group">
-              <label for="contact-vehicle">Vehicle of Interest</label>
-              <input id="contact-vehicle" name="Vehicle" type="text" placeholder="e.g. 2024 Toyota Rumion">
-            </div>
-
-            <div class="form-group">
-              <label for="contact-message">Message</label>
-              <textarea id="contact-message" name="Message" rows="4" placeholder="Tell us your budget, deposit and monthly target." required></textarea>
+            <div class="checkbox-row">
+              <label class="checkbox-label" for="contact-consent">
+                <input id="contact-consent" name="Consent" type="checkbox" required>
+                I confirm the details are accurate and I agree to be contacted regarding vehicle sourcing and finance options.
+              </label>
             </div>
 
             <button type="submit" class="btn btn-primary form-submit-btn">Send Enquiry</button>
