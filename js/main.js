@@ -160,7 +160,7 @@
     updateActiveNav();
   }
 
-  // ─── PRE-QUAL CHATBOT (index page only) ───
+  // ─── CHATBOT ASSISTANT (index page only) ───
   const chatbotToggle  = document.getElementById('chatbotToggle');
   const chatbotPanel   = document.getElementById('chatbotPanel');
   const chatbotClose   = document.getElementById('chatbotClose');
@@ -233,14 +233,14 @@
         message = 'You may qualify, but we need to verify a few details. Continue on WhatsApp and we will guide you.';
       }
 
-      chatbotQEl.textContent = 'Pre-check complete';
+      chatbotQEl.textContent = 'Assistant check complete';
       chatbotOptEl.innerHTML = '';
       chatbotResEl.className = 'chatbot-result show ' + level;
       chatbotResEl.textContent = message;
 
       if (chatbotWAEl) {
         const waMessage =
-          'Hi Thabo, I completed the pre-qualification chatbot. ' +
+          'Hi Thabo, I completed the chatbot assistant questions. ' +
           'Result: ' + (level === 'good' ? 'Likely qualify' : (level === 'medium' ? 'Needs review' : 'Low chance')) + '. ' +
           'Credit score 600+: ' + (answers.credit ? 'Yes' : 'No') + ', ' +
           'Blacklisted: ' + (answers.blacklisted ? 'Yes' : 'No') + ', ' +
@@ -270,6 +270,7 @@
     if (chatbotRestart) chatbotRestart.addEventListener('click', restartChatbot);
 
     renderQuestion();
+    openChatbot();
   }
 
 })();
