@@ -270,7 +270,26 @@
     if (chatbotRestart) chatbotRestart.addEventListener('click', restartChatbot);
 
     renderQuestion();
-    openChatbot();
+
+    // Open after a short delay and only once per browser session.
+    const sessionKey = 'thaboChatbotAutoOpened';
+    let shouldAutoOpen = true;
+    try {
+      shouldAutoOpen = !sessionStorage.getItem(sessionKey);
+    } catch (err) {
+      shouldAutoOpen = true;
+    }
+
+    if (shouldAutoOpen) {
+      window.setTimeout(function () {
+        if (chatbotPanel.hidden) openChatbot();
+        try {
+          sessionStorage.setItem(sessionKey, '1');
+        } catch (err) {
+          // Ignore storage errors and keep chatbot functional.
+        }
+      }, 2200);
+    }
   }
 
 })();
