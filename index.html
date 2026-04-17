@@ -667,6 +667,32 @@
     </div>
   </section>
 
+  <!-- ═══ PRE-QUAL CHATBOT ═══ -->
+  <div class="prequal-chatbot" id="prequalChatbot" aria-live="polite">
+    <button class="chatbot-toggle" id="chatbotToggle" aria-expanded="false" aria-controls="chatbotPanel">
+      <span>Pre-Qualify</span>
+    </button>
+
+    <div class="chatbot-panel" id="chatbotPanel" hidden>
+      <div class="chatbot-header">
+        <h3>Finance Pre-Check</h3>
+        <button class="chatbot-close" id="chatbotClose" aria-label="Close chatbot">x</button>
+      </div>
+
+      <div class="chatbot-body">
+        <p class="chatbot-intro">Answer a few quick questions and we will estimate if you are likely to qualify.</p>
+        <div class="chatbot-question" id="chatbotQuestion"></div>
+        <div class="chatbot-options" id="chatbotOptions"></div>
+        <div class="chatbot-result" id="chatbotResult"></div>
+      </div>
+
+      <div class="chatbot-footer">
+        <button class="chatbot-secondary" id="chatbotRestart">Restart</button>
+        <a id="chatbotWhatsApp" class="btn btn-whatsapp" href="https://wa.me/27682515329?text=Hi%20Thabo%2C%20I%20want%20to%20continue%20with%20finance%20pre-qualification." target="_blank" rel="noopener">Continue on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══ FOOTER ═══ -->
   <footer>
     <p>&copy; 2026 <span>Thabo The Car Dealer</span>. All rights reserved. | Pre-owned vehicles sold subject to availability.</p>

@@ -160,4 +160,116 @@
     updateActiveNav();
   }
 
+  // ─── PRE-QUAL CHATBOT (index page only) ───
+  const chatbotToggle  = document.getElementById('chatbotToggle');
+  const chatbotPanel   = document.getElementById('chatbotPanel');
+  const chatbotClose   = document.getElementById('chatbotClose');
+  const chatbotRestart = document.getElementById('chatbotRestart');
+  const chatbotQEl     = document.getElementById('chatbotQuestion');
+  const chatbotOptEl   = document.getElementById('chatbotOptions');
+  const chatbotResEl   = document.getElementById('chatbotResult');
+  const chatbotWAEl    = document.getElementById('chatbotWhatsApp');
+
+  if (chatbotToggle && chatbotPanel && chatbotQEl && chatbotOptEl && chatbotResEl) {
+    const questions = [
+      { key: 'credit', text: 'Is your credit score 600 or higher?', options: [{ label: 'Yes', value: true, points: 2 }, { label: 'No', value: false, points: -2 }] },
+      { key: 'blacklisted', text: 'Are you currently blacklisted?', options: [{ label: 'No', value: false, points: 2 }, { label: 'Yes', value: true, points: -3 }] },
+      { key: 'debtReview', text: 'Are you under debt review?', options: [{ label: 'No', value: false, points: 2 }, { label: 'Yes', value: true, points: -3 }] },
+      { key: 'payslips', text: 'Can you provide 3 recent payslips?', options: [{ label: 'Yes', value: true, points: 1 }, { label: 'No', value: false, points: -1 }] },
+      { key: 'bankStatements', text: 'Can you provide 3 months bank statements?', options: [{ label: 'Yes', value: true, points: 1 }, { label: 'No', value: false, points: -1 }] }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    const answers = {};
+
+    function openChatbot() {
+      chatbotPanel.hidden = false;
+      chatbotToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeChatbot() {
+      chatbotPanel.hidden = true;
+      chatbotToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function renderQuestion() {
+      chatbotResEl.className = 'chatbot-result';
+      chatbotResEl.textContent = '';
+
+      const q = questions[currentQuestion];
+      chatbotQEl.textContent = (currentQuestion + 1) + '/' + questions.length + ': ' + q.text;
+      chatbotOptEl.innerHTML = '';
+
+      q.options.forEach(function (option) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'chatbot-option';
+        btn.textContent = option.label;
+        btn.addEventListener('click', function () {
+          answers[q.key] = option.value;
+          score += option.points;
+          currentQuestion += 1;
+
+          if (currentQuestion >= questions.length) {
+            showResult();
+          } else {
+            renderQuestion();
+          }
+        });
+        chatbotOptEl.appendChild(btn);
+      });
+    }
+
+    function showResult() {
+      let level = 'low';
+      let message = 'Based on your answers, your finance approval chance is currently low.';
+
+      if (score >= 4) {
+        level = 'good';
+        message = 'Great news: you look likely to qualify for finance. Continue on WhatsApp and we will assist with the next step.';
+      } else if (score >= 1) {
+        level = 'medium';
+        message = 'You may qualify, but we need to verify a few details. Continue on WhatsApp and we will guide you.';
+      }
+
+      chatbotQEl.textContent = 'Pre-check complete';
+      chatbotOptEl.innerHTML = '';
+      chatbotResEl.className = 'chatbot-result show ' + level;
+      chatbotResEl.textContent = message;
+
+      if (chatbotWAEl) {
+        const waMessage =
+          'Hi Thabo, I completed the pre-qualification chatbot. ' +
+          'Result: ' + (level === 'good' ? 'Likely qualify' : (level === 'medium' ? 'Needs review' : 'Low chance')) + '. ' +
+          'Credit score 600+: ' + (answers.credit ? 'Yes' : 'No') + ', ' +
+          'Blacklisted: ' + (answers.blacklisted ? 'Yes' : 'No') + ', ' +
+          'Under debt review: ' + (answers.debtReview ? 'Yes' : 'No') + ', ' +
+          '3 payslips: ' + (answers.payslips ? 'Yes' : 'No') + ', ' +
+          '3 bank statements: ' + (answers.bankStatements ? 'Yes' : 'No') + '.';
+        chatbotWAEl.href = 'https://wa.me/27682515329?text=' + encodeURIComponent(waMessage);
+      }
+    }
+
+    function restartChatbot() {
+      currentQuestion = 0;
+      score = 0;
+      Object.keys(answers).forEach(function (k) { delete answers[k]; });
+      renderQuestion();
+    }
+
+    chatbotToggle.addEventListener('click', function () {
+      if (chatbotPanel.hidden) {
+        openChatbot();
+      } else {
+        closeChatbot();
+      }
+    });
+
+    if (chatbotClose) chatbotClose.addEventListener('click', closeChatbot);
+    if (chatbotRestart) chatbotRestart.addEventListener('click', restartChatbot);
+
+    renderQuestion();
+  }
+
 })();
